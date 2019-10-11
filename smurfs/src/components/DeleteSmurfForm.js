@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux';
-import {deleteSmurf} from '../actions';
+import {deleteSmurf, fetchSmurfs} from '../actions';
 
 const DeleteSmurfForm = props => {
     const [id, setId] = useState("");
@@ -40,4 +40,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{deleteSmurf})(DeleteSmurfForm)
+export default connect(mapStateToProps,{deleteSmurf, fetchSmurfs})(DeleteSmurfForm)

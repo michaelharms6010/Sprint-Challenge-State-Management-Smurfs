@@ -48,7 +48,8 @@ h1 {
   background: seagreen;
   margin: 4% auto;
   padding:3%;
-  width:95%;
+  width:90%;
+  border-radius:5px;
 }
 
 .smurf-form h3{
