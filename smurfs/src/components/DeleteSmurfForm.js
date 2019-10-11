@@ -26,7 +26,7 @@ const DeleteSmurfForm = props => {
                     value={id}
                     name="id"
                 />
-            <button type="submit">Edit</button> 
+            <button type="submit">Delete</button> 
             </form>
         </div>
     )
