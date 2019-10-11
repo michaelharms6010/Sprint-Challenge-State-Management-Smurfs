@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchSmurfs } from '../actions/'
+import { fetchSmurfs, deleteSmurf } from '../actions/'
 
 const Smurfs = props => {
     useEffect(() => {
@@ -16,6 +16,8 @@ const Smurfs = props => {
                             <h2>{smurf.name}</h2>
                             <h4>Age: {smurf.age}</h4>
                             <h4>Height: {smurf.height}</h4>
+                            <h4>id: {smurf.id}</h4> 
+                            
                         </div>
                     )
                 })}
@@ -30,4 +32,4 @@ const mapPropsToState = state => {
     }
   }
 
-export default connect(mapPropsToState, {fetchSmurfs})(Smurfs)
+export default connect(mapPropsToState, {fetchSmurfs, deleteSmurf})(Smurfs)

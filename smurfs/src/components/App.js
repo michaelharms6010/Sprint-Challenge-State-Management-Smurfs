@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {fetchSmurfs} from '../actions/index'
 import Smurfs from "./Smurfs"
 import AddSmurfForm from "./AddSmurfForm";
+import EditSmurfForm from "./EditSmurfForm";
+import DeleteSmurfForm from "./DeleteSmurfForm";
 
 class App extends Component {
   state = {
@@ -20,6 +22,8 @@ class App extends Component {
         <p>If the word "Smurf" is starting to look weird to you, you're not the only one.</p>
         <Smurfs />
         <AddSmurfForm />
+        <EditSmurfForm />
+        <DeleteSmurfForm />
       </div>
     );
   }

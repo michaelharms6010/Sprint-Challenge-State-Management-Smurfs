@@ -1,3 +1,11 @@
+html{
+  background: gold;
+}
+
+h1 {
+  color:blue;
+}
+
 .App {
   text-align: center;
 }
@@ -26,3 +34,31 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.smurf-card {
+  background: purple;
+  margin: 4% auto;
+  color: cyan;
+  width: 50%;
+  border-radius:20px;
+  padding:20px
+}
+
+.smurf-form{
+  background: seagreen;
+  margin: 4% auto;
+  padding:3%;
+  width:95%;
+}
+
+.smurf-form h3{
+  margin:0px auto;
+  padding-bottom:10px;
+}
+
+form {
+  display:flex;
+  justify-content: space-between;
+  
+}
+

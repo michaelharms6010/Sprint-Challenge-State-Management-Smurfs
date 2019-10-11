@@ -7,8 +7,10 @@ import {
     ADD_SMURF_FAILURE,
     UPDATE_SMURF,
     UPDATE_SMURF_FAILURE,
+    UPDATE_SMURF_SUCCESS,
     DELETE_SMURF
 } from '../actions/';
+import { REFUSED } from 'dns';
 
 const initialState = {
     smurfs: [],
@@ -78,12 +80,29 @@ const reducer = (state = initialState, action) => {
             }
         }
 
+        case UPDATE_SMURF_SUCCESS: {
+            return {
+                ...state,
+                updatingSmurf: false,
+                error:""
+
+            }
+
+        }
+
         case UPDATE_SMURF_FAILURE: {
             return {
                 ...state,
                 updatingSmurf: false,
                 error: action.payload
 
+            }
+        }
+
+        case DELETE_SMURF: {
+            return {
+                ...state,
+                smurfs: state.smurfs.filter( smurf => smurf.id !== action.payload),
             }
         }
 

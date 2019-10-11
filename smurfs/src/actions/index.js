@@ -5,11 +5,13 @@ export const FETCH_SMURF_SUCCESS = "FETCH_SMURF_SUCCESS"
 export const FETCH_SMURF_ERROR = "FETCH_SMURF_ERROR"
 export const ADD_SMURF ="ADD_SMURF"
 export const UPDATE_SMURF = "UPDATE_SMURF"
-export const DELETE_SMURF = "DELETE_SMURF"
 export const ADD_SMURF_SUCCESS = "ADD_SMURF_SUCCESS"
 export const ADD_SMURF_FAILURE = "ADD_SMURF_FAILURE"
 export const UPDATE_SMURF_SUCCESS = "UPDATE_SMURF_SUCCESS"
 export const UPDATE_SMURF_FAILURE = "UPDATE_SMURF_FAILURE"
+export const DELETE_SMURF = "DELETE_SMURF"
+export const DELETE_SMURF_SUCCESS = "DELETE_SMURF_SUCCESS"
+export const DELETE_SMURF_FAILURE = "DELETE_SMURF_FAILURE"
 
 export const fetchSmurfs = ()=>{
     return dispatch => {
@@ -52,6 +54,21 @@ export const updateSmurf = updatedSmurf => dispatch =>{
     })
     .catch(err => {
         dispatch({ type: UPDATE_SMURF_FAILURE, payload: err})
+    })
+    
+        
+}
+
+export const deleteSmurf = id => dispatch =>{
+    dispatch({type: DELETE_SMURF})
+    console.log("Deleting" , id)
+    axios.delete(`http://localhost:3333/smurfs/${id}`, id)
+    .then(res =>{
+        console.log("delete response:", res)
+        dispatch({type: DELETE_SMURF_SUCCESS, payload: id})
+    })
+    .catch(err => {
+        dispatch({ type: DELETE_SMURF_FAILURE, payload: err})
     })
     
         

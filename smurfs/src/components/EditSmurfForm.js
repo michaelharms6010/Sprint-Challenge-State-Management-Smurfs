@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux';
-import {addSmurf} from '../actions';
+import {updateSmurf} from '../actions';
 
-const AddSmurfForm = props => {
+const EditSmurfForm = props => {
     const [newSmurf, setNewSmurf] = useState({
         name: "",
         age: "",
@@ -12,7 +12,7 @@ const AddSmurfForm = props => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        props.addSmurf(newSmurf)
+        props.updateSmurf(newSmurf)
         setNewSmurf({
             name: "",
             age: "",
@@ -25,13 +25,12 @@ const AddSmurfForm = props => {
         setNewSmurf({ 
             ...newSmurf,
             [e.target.name]: e.target.value,
-            id: props.smurfs.length
-         })
+            })
     };
 
     return(
         <div className="smurf-form">
-            <h3>Add a Smurf</h3> 
+            <h3>Edit a Smurf by ID</h3>
             <form onSubmit={handleSubmit}>
                 <input
                     onChange={handleChange}
@@ -51,7 +50,13 @@ const AddSmurfForm = props => {
                     value={newSmurf.height}
                     name="height"
                 />
-            <button type="submit">Populate</button> 
+                <input
+                    onChange={handleChange}
+                    placeholder="id to edit"
+                    value={newSmurf.id}
+                    name="id"
+                />
+                <button type="submit">Edit</button> 
             </form>
         </div>
     )
@@ -65,4 +70,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{addSmurf})(AddSmurfForm)
+export default connect(mapStateToProps,{updateSmurf})(EditSmurfForm)
