@@ -1,68 +1,63 @@
-import React, {useState} from 'react'
-import {connect} from 'react-redux';
-import {addSmurf} from '../actions';
+import React, {useState,  useContext} from 'react';
+import {SmurfContext} from "../contexts/SmurfContext"
+import axios from "axios"
 
-const AddSmurfForm = props => {
-    const [newSmurf, setNewSmurf] = useState({
+function AddSmurfForm() {
+    const {setSmurfs} = useContext(SmurfContext)
+
+    const [addSmurf, setAddSmurf] = useState({
         name: "",
         age: "",
         height: ""
-    });
-
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        props.addSmurf(newSmurf)
-        setNewSmurf({
-            name: "",
-            age: "",
-            height: "",
-            id: ""
-        })
-    };
+    })
 
     const handleChange = e => {
-        setNewSmurf({ 
-            ...newSmurf,
-            [e.target.name]: e.target.value,
-            id: props.smurfs.length
-         })
-    };
-
-    return(
-        <div className="smurf-form">
-            <h3>Add a Smurf</h3> 
-            <form onSubmit={handleSubmit}>
-                <input
-                    onChange={handleChange}
-                    placeholder="name"
-                    value={newSmurf.name}
-                    name="name"
-                />
-                <input
-                    onChange={handleChange}
-                    placeholder="age"
-                    value={newSmurf.age}
-                    name="age"
-                />
-                <input
-                    onChange={handleChange}
-                    placeholder="height"
-                    value={newSmurf.height}
-                    name="height"
-                />
-            <button type="submit">Populate</button> 
-            </form>
-        </div>
-    )
-};
-
-
-const mapStateToProps = state => {
-    return {
-        smurfs: state.smurfs
- 
+        setAddSmurf({
+            ...addSmurf,
+            [e.target.name]: e.target.value
+        })
     }
+
+    const addNewSmurf = e => {
+        e.preventDefault();
+        axios.post("http://localhost:3333/smurfs", addSmurf)
+        .then(r => {
+            setSmurfs(r.data)
+            setAddSmurf({
+                name: "",
+                age: "",
+                height: ""
+            })
+        })
+        .catch(err => console.log(err))
+    }
+
+    return (
+        <form className="add-form" onSubmit={addNewSmurf}>
+
+            <input
+            onChange={handleChange}
+            name="name"
+            value={addSmurf.name}
+            placeholder="Name"
+            />
+            <input
+            onChange={handleChange}
+            name="age"
+            value={addSmurf.age}
+            placeholder="Age"
+            />
+            <input
+            onChange={handleChange}
+            name="height"
+            value={addSmurf.height}
+            placeholder="Height"
+            />
+            <button type="submit">Add Smurf</button>
+
+        </form>
+
+    )
 }
 
-export default connect(mapStateToProps,{addSmurf})(AddSmurfForm)
+export default AddSmurfForm;
